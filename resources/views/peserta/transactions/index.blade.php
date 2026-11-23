@@ -8,16 +8,16 @@
             <p class="text-sm text-gray-500 mt-1">Lacak status verifikasi, grade kelayakan, dan poin yang diperoleh dari setiap setoran.</p>
         </div>
         <a href="{{ route('peserta.transactions.create') }}"
-            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#F97316] to-[#F59E0B] text-white text-xs font-heading font-bold shadow-md shadow-orange-500/20 hover:opacity-95 transition-all">
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white text-xs font-heading font-bold shadow-md shadow-red-500/25 hover:opacity-95 hover:shadow-red-500/35 active:scale-[0.98] transition-all duration-200">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v16m8-8H4" />
             </svg>
             Setor Limbah Baru
         </a>
     </div>
 
     <!-- Transactions Table -->
-    <div class="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xs">
+    <div class="bg-white border border-[#E5E7EB] rounded-3xl overflow-hidden shadow-xs">
         @if($transactions->isEmpty())
             <div class="text-center py-16 text-gray-400">
                 <svg class="w-16 h-16 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -25,7 +25,7 @@
                 </svg>
                 <p class="text-base font-semibold text-gray-600">Belum ada transaksi setoran limbah</p>
                 <p class="text-xs text-gray-400 mt-1">Mulai kumpulkan botol atau kaleng dan setor ke sistem.</p>
-                <a href="{{ route('peserta.transactions.create') }}" class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F97316] text-white text-xs font-bold hover:bg-orange-600 transition-colors">
+                <a href="{{ route('peserta.transactions.create') }}" class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white text-xs font-bold shadow-md shadow-red-500/20 hover:opacity-95 transition-all">
                     Setor Limbah Sekarang
                 </a>
             </div>
@@ -46,10 +46,10 @@
                     </thead>
                     <tbody class="divide-y divide-[#E5E7EB]">
                         @foreach($transactions as $trx)
-                            <tr class="hover:bg-gray-50/70 transition-colors">
+                            <tr class="hover:bg-red-50/20 transition-colors">
                                 <td class="py-3.5 px-4 font-mono text-xs font-bold text-gray-500">#{{ $trx->id }}</td>
                                 <td class="py-3.5 px-4">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $trx->category->name === 'Botol' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-orange-50 text-orange-700 border border-orange-200' }}">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $trx->category->name === 'Botol' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200' }}">
                                         {{ $trx->category->name }}
                                     </span>
                                 </td>
@@ -69,7 +69,7 @@
                                         <span class="text-xs text-gray-400 italic">Menunggu Evaluasi</span>
                                     @endif
                                 </td>
-                                <td class="py-3.5 px-4 font-heading font-extrabold text-sm {{ $trx->earned_points > 0 ? 'text-[#F97316]' : 'text-gray-400' }}">
+                                <td class="py-3.5 px-4 font-heading font-extrabold text-sm {{ $trx->earned_points > 0 ? 'text-red-600' : 'text-gray-400' }}">
                                     @if($trx->status === 'approved')
                                         +{{ number_format($trx->earned_points) }} Poin
                                     @else

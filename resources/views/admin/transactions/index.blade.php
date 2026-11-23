@@ -9,28 +9,28 @@
         </div>
     </div>
 
-    <!-- Filter Tabs -->
+    <!-- Filter Tabs (Red Accent) -->
     <div class="flex flex-wrap items-center gap-2 border-b border-[#E5E7EB] pb-3">
         <a href="{{ route('admin.transactions.index') }}"
-            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all {{ empty($status) ? 'bg-[#1F2937] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-gray-600 hover:bg-gray-50' }}">
+            class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ empty($status) ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md shadow-red-500/25' : 'bg-white border border-[#E5E7EB] text-gray-600 hover:bg-gray-50' }}">
             Semua Transaksi
         </a>
         <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}"
-            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all {{ $status === 'pending' ? 'bg-[#F59E0B] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-amber-700 hover:bg-amber-50/50' }}">
+            class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ $status === 'pending' ? 'bg-[#F59E0B] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-amber-700 hover:bg-amber-50/50' }}">
             Pending Verifikasi
         </a>
         <a href="{{ route('admin.transactions.index', ['status' => 'approved']) }}"
-            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all {{ $status === 'approved' ? 'bg-[#10B981] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-emerald-700 hover:bg-emerald-50/50' }}">
+            class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ $status === 'approved' ? 'bg-[#10B981] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-emerald-700 hover:bg-emerald-50/50' }}">
             Disetujui
         </a>
         <a href="{{ route('admin.transactions.index', ['status' => 'rejected']) }}"
-            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all {{ $status === 'rejected' ? 'bg-[#EF4444] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-red-700 hover:bg-red-50/50' }}">
+            class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ $status === 'rejected' ? 'bg-[#EF4444] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-red-700 hover:bg-red-50/50' }}">
             Ditolak
         </a>
     </div>
 
     <!-- Data Table -->
-    <div class="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xs">
+    <div class="bg-white border border-[#E5E7EB] rounded-3xl overflow-hidden shadow-xs">
         @if($transactions->isEmpty())
             <div class="text-center py-12 text-gray-400">
                 <svg class="w-12 h-12 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,14 +56,14 @@
                     </thead>
                     <tbody class="divide-y divide-[#E5E7EB]">
                         @foreach($transactions as $trx)
-                            <tr class="hover:bg-gray-50/70 transition-colors">
+                            <tr class="hover:bg-red-50/20 transition-colors">
                                 <td class="py-3.5 px-4 font-mono text-xs font-bold text-gray-500">#{{ $trx->id }}</td>
                                 <td class="py-3.5 px-4">
                                     <div class="font-semibold text-gray-900">{{ $trx->user->name }}</div>
                                     <div class="text-xs text-gray-400">{{ $trx->user->email }}</div>
                                 </td>
                                 <td class="py-3.5 px-4 font-medium">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $trx->category->name === 'Botol' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-orange-50 text-orange-700 border border-orange-200' }}">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold {{ $trx->category->name === 'Botol' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200' }}">
                                         {{ $trx->category->name }}
                                     </span>
                                 </td>
@@ -80,10 +80,10 @@
                                             Grade {{ $trx->grade->grade_code }} (+{{ $trx->grade->bonus_point }} Poin)
                                         </span>
                                     @else
-                                        <span class="text-xs text-amber-600 font-medium italic">Belum Dinilai</span>
+                                        <span class="text-xs text-amber-600 font-semibold italic">Belum Dinilai</span>
                                     @endif
                                 </td>
-                                <td class="py-3.5 px-4 font-bold text-sm {{ $trx->earned_points > 0 ? 'text-[#F97316]' : 'text-gray-400' }}">
+                                <td class="py-3.5 px-4 font-extrabold text-sm {{ $trx->earned_points > 0 ? 'text-red-600' : 'text-gray-400' }}">
                                     @if($trx->status === 'approved')
                                         +{{ number_format($trx->earned_points) }}
                                     @else
@@ -103,7 +103,7 @@
                                     {{ $trx->created_at->translatedFormat('d M Y, H:i') }}
                                 </td>
                                 <td class="py-3.5 px-4 text-right">
-                                    <a href="{{ route('admin.transactions.show', $trx) }}" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg {{ $trx->status === 'pending' ? 'bg-gradient-to-r from-[#F97316] to-[#F59E0B] text-white shadow-xs' : 'border border-gray-300 text-gray-700 hover:bg-gray-50' }} text-xs font-semibold transition-all">
+                                    <a href="{{ route('admin.transactions.show', $trx) }}" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl {{ $trx->status === 'pending' ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-xs shadow-red-500/25' : 'border border-gray-300 text-gray-700 hover:bg-gray-50' }} text-xs font-bold transition-all">
                                         {{ $trx->status === 'pending' ? 'Verifikasi' : 'Detail' }}
                                     </a>
                                 </td>

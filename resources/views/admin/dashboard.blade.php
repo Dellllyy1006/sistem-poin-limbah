@@ -9,9 +9,10 @@
             <p class="text-sm text-gray-500 mt-1">Pantau setoran limbah, verifikasi transaksi, dan kelola penukaran poin peserta.</p>
         </div>
         <div class="flex items-center gap-3">
-            <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#F97316] to-[#F59E0B] text-white text-xs font-heading font-bold shadow-md shadow-orange-500/20 hover:opacity-95 transition-all">
+            <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white text-xs font-heading font-bold shadow-md shadow-red-500/25 hover:opacity-95 hover:shadow-red-500/35 active:scale-[0.98] transition-all duration-200">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Verifikasi Setoran ({{ $pendingTransactions }})
             </a>
@@ -21,10 +22,10 @@
     <!-- Stat Cards Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- 1. Menunggu Verifikasi -->
-        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs">
+        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs hover:shadow-md hover:border-amber-200 transition-all duration-200">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Antrean Verifikasi</span>
-                <span class="w-9 h-9 rounded-xl bg-amber-100 text-[#F59E0B] flex items-center justify-center">
+                <span class="w-10 h-10 rounded-xl bg-amber-100 text-[#F59E0B] flex items-center justify-center shadow-xs">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -34,16 +35,16 @@
                 <span class="font-heading font-extrabold text-3xl text-[#F59E0B]">{{ $pendingTransactions }}</span>
                 <span class="text-xs text-gray-500">transaksi</span>
             </div>
-            <div class="mt-3 text-xs text-amber-700 bg-amber-50 p-2 rounded-lg font-medium">
+            <div class="mt-3 text-xs text-amber-700 bg-amber-50 p-2 rounded-xl font-medium">
                 Memerlukan evaluasi grade
             </div>
         </div>
 
         <!-- 2. Transaksi Disetujui -->
-        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs">
+        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs hover:shadow-md hover:border-emerald-200 transition-all duration-200">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Disetujui</span>
-                <span class="w-9 h-9 rounded-xl bg-emerald-100 text-[#10B981] flex items-center justify-center">
+                <span class="w-10 h-10 rounded-xl bg-emerald-100 text-[#10B981] flex items-center justify-center shadow-xs">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
@@ -53,57 +54,57 @@
                 <span class="font-heading font-extrabold text-3xl text-[#10B981]">{{ $approvedTransactions }}</span>
                 <span class="text-xs text-gray-500">transaksi</span>
             </div>
-            <div class="mt-3 text-xs text-emerald-700 bg-emerald-50 p-2 rounded-lg font-medium">
+            <div class="mt-3 text-xs text-emerald-700 bg-emerald-50 p-2 rounded-xl font-medium">
                 Poin berhasil ditambahkan
             </div>
         </div>
 
-        <!-- 3. Total Poin Diberikan -->
-        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs">
+        <!-- 3. Total Poin Diberikan (Red Highlight) -->
+        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs hover:shadow-md hover:border-red-200 transition-all duration-200">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Poin Beredar</span>
-                <span class="w-9 h-9 rounded-xl bg-orange-100 text-[#F97316] flex items-center justify-center">
+                <span class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 to-rose-600 text-white flex items-center justify-center shadow-md shadow-red-500/25">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </span>
             </div>
             <div class="mt-4 flex items-baseline gap-2">
-                <span class="font-heading font-extrabold text-3xl text-[#F97316]">{{ number_format($totalPointsDistributed) }}</span>
+                <span class="font-heading font-extrabold text-3xl text-red-600">{{ number_format($totalPointsDistributed) }}</span>
                 <span class="text-xs text-gray-500">Poin</span>
             </div>
-            <div class="mt-3 text-xs text-orange-700 bg-orange-50 p-2 rounded-lg font-medium">
+            <div class="mt-3 text-xs text-red-700 bg-red-50 p-2 rounded-xl font-medium">
                 Akumulasi seluruh peserta
             </div>
         </div>
 
         <!-- 4. Total Pencairan Rupiah -->
-        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs">
+        <div class="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs hover:shadow-md hover:border-blue-200 transition-all duration-200">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Dicairkan</span>
-                <span class="w-9 h-9 rounded-xl bg-blue-100 text-[#3B82F6] flex items-center justify-center">
+                <span class="w-10 h-10 rounded-xl bg-blue-100 text-[#3B82F6] flex items-center justify-center shadow-xs">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </span>
             </div>
             <div class="mt-4 flex items-baseline gap-2">
-                <span class="font-heading font-extrabold text-2xl text-gray-800">Rp {{ number_format($totalRedeemedRupiah, 0, ',', '.') }}</span>
+                <span class="font-heading font-extrabold text-2xl text-gray-900">Rp {{ number_format($totalRedeemedRupiah, 0, ',', '.') }}</span>
             </div>
-            <div class="mt-3 text-xs text-blue-700 bg-blue-50 p-2 rounded-lg font-medium">
+            <div class="mt-3 text-xs text-blue-700 bg-blue-50 p-2 rounded-xl font-medium">
                 {{ $pendingRedemptions }} klaim pending
             </div>
         </div>
     </div>
 
     <!-- Antrean Pending Verifikasi -->
-    <div class="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-xs">
+    <div class="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-xs">
         <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-[#F59E0B]"></span>
                 <h2 class="font-heading font-bold text-lg text-[#1F2937]">Antrean Verifikasi Transaksi Limbah Terbaru</h2>
             </div>
-            <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}" class="text-xs font-semibold text-[#F97316] hover:underline">
+            <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}" class="text-xs font-bold text-red-600 hover:text-red-700 hover:underline">
                 Lihat Semua Antrean &rarr;
             </a>
         </div>
@@ -131,14 +132,14 @@
                     </thead>
                     <tbody class="divide-y divide-[#E5E7EB]">
                         @foreach($recentPending as $trx)
-                            <tr class="hover:bg-gray-50/70 transition-colors">
+                            <tr class="hover:bg-red-50/20 transition-colors">
                                 <td class="py-3 px-4 font-mono text-xs font-bold text-gray-500">#{{ $trx->id }}</td>
                                 <td class="py-3 px-4">
                                     <div class="font-semibold text-gray-800">{{ $trx->user->name }}</div>
                                     <div class="text-xs text-gray-400">{{ $trx->user->email }}</div>
                                 </td>
                                 <td class="py-3 px-4">
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium {{ $trx->category->name === 'Botol' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-orange-50 text-orange-700 border border-orange-200' }}">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold {{ $trx->category->name === 'Botol' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200' }}">
                                         {{ $trx->category->name }}
                                     </span>
                                 </td>
@@ -149,7 +150,8 @@
                                     {{ $trx->created_at->translatedFormat('d M Y, H:i') }}
                                 </td>
                                 <td class="py-3 px-4 text-right">
-                                    <a href="{{ route('admin.transactions.show', $trx) }}" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#F97316] to-[#F59E0B] text-white text-xs font-heading font-semibold hover:opacity-95 shadow-xs">
+                                    <a href="{{ route('admin.transactions.show', $trx) }}"
+                                        class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white text-xs font-heading font-bold hover:opacity-95 shadow-xs shadow-red-500/20">
                                         Verifikasi & Nilai
                                     </a>
                                 </td>
@@ -162,10 +164,10 @@
     </div>
 
     <!-- Riwayat Transaksi Terbaru -->
-    <div class="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-xs">
+    <div class="bg-white border border-[#E5E7EB] rounded-3xl p-6 shadow-xs">
         <div class="flex items-center justify-between mb-4">
             <h2 class="font-heading font-bold text-lg text-[#1F2937]">Semua Aktivitas Transaksi Terbaru</h2>
-            <a href="{{ route('admin.transactions.index') }}" class="text-xs font-semibold text-[#F97316] hover:underline">
+            <a href="{{ route('admin.transactions.index') }}" class="text-xs font-bold text-red-600 hover:text-red-700 hover:underline">
                 Kelola Semua Transaksi &rarr;
             </a>
         </div>
@@ -186,7 +188,7 @@
                 </thead>
                 <tbody class="divide-y divide-[#E5E7EB]">
                     @foreach($recentTransactions as $trx)
-                        <tr class="hover:bg-gray-50/70 transition-colors">
+                        <tr class="hover:bg-red-50/20 transition-colors">
                             <td class="py-3 px-4 font-mono text-xs font-bold text-gray-500">#{{ $trx->id }}</td>
                             <td class="py-3 px-4 font-medium text-gray-800">{{ $trx->user->name }}</td>
                             <td class="py-3 px-4">{{ $trx->category->name }}</td>
@@ -204,7 +206,7 @@
                                     <span class="text-xs text-gray-400">-</span>
                                 @endif
                             </td>
-                            <td class="py-3 px-4 font-bold {{ $trx->earned_points > 0 ? 'text-[#F97316]' : 'text-gray-400' }}">
+                            <td class="py-3 px-4 font-extrabold {{ $trx->earned_points > 0 ? 'text-red-600' : 'text-gray-400' }}">
                                 +{{ number_format($trx->earned_points) }}
                             </td>
                             <td class="py-3 px-4">
@@ -217,7 +219,7 @@
                                 @endif
                             </td>
                             <td class="py-3 px-4 text-right">
-                                <a href="{{ route('admin.transactions.show', $trx) }}" class="text-xs font-semibold text-gray-600 hover:text-[#F97316]">
+                                <a href="{{ route('admin.transactions.show', $trx) }}" class="text-xs font-bold text-gray-600 hover:text-red-600">
                                     Lihat &rarr;
                                 </a>
                             </td>

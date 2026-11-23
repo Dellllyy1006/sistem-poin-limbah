@@ -9,24 +9,24 @@
         </div>
     </div>
 
-    <!-- Filter Tabs -->
+    <!-- Filter Tabs (Red Theme) -->
     <div class="flex flex-wrap items-center gap-2 border-b border-[#E5E7EB] pb-3">
         <a href="{{ route('admin.redemptions.index') }}"
-            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all {{ empty($status) ? 'bg-[#1F2937] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-gray-600 hover:bg-gray-50' }}">
+            class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ empty($status) ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md shadow-red-500/25' : 'bg-white border border-[#E5E7EB] text-gray-600 hover:bg-gray-50' }}">
             Semua Penukaran
         </a>
         <a href="{{ route('admin.redemptions.index', ['status' => 'pending']) }}"
-            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all {{ $status === 'pending' ? 'bg-[#F59E0B] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-amber-700 hover:bg-amber-50/50' }}">
+            class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ $status === 'pending' ? 'bg-[#F59E0B] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-amber-700 hover:bg-amber-50/50' }}">
             Menunggu Diproses (Pending)
         </a>
         <a href="{{ route('admin.redemptions.index', ['status' => 'completed']) }}"
-            class="px-4 py-2 rounded-xl text-xs font-semibold transition-all {{ $status === 'completed' ? 'bg-[#10B981] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-emerald-700 hover:bg-emerald-50/50' }}">
+            class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ $status === 'completed' ? 'bg-[#10B981] text-white shadow-xs' : 'bg-white border border-[#E5E7EB] text-emerald-700 hover:bg-emerald-50/50' }}">
             Selesai Ditransfer (Completed)
         </a>
     </div>
 
     <!-- Redemptions Table -->
-    <div class="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xs">
+    <div class="bg-white border border-[#E5E7EB] rounded-3xl overflow-hidden shadow-xs">
         @if($redemptions->isEmpty())
             <div class="text-center py-12 text-gray-400">
                 <svg class="w-12 h-12 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,16 +50,16 @@
                     </thead>
                     <tbody class="divide-y divide-[#E5E7EB]">
                         @foreach($redemptions as $item)
-                            <tr class="hover:bg-gray-50/70 transition-colors">
+                            <tr class="hover:bg-red-50/20 transition-colors">
                                 <td class="py-3.5 px-4 font-mono text-xs font-bold text-gray-500">#{{ $item->id }}</td>
                                 <td class="py-3.5 px-4">
                                     <div class="font-semibold text-gray-900">{{ $item->user->name }}</div>
                                     <div class="text-xs text-gray-400">{{ $item->user->email }}</div>
                                 </td>
-                                <td class="py-3.5 px-4 font-bold text-[#F97316]">
+                                <td class="py-3.5 px-4 font-extrabold text-red-600">
                                     {{ number_format($item->points_used) }} Poin
                                 </td>
-                                <td class="py-3.5 px-4 font-heading font-extrabold text-gray-900 text-base">
+                                <td class="py-3.5 px-4 font-heading font-black text-gray-900 text-base">
                                     Rp {{ number_format($item->rupiah_amount, 0, ',', '.') }}
                                 </td>
                                 <td class="py-3.5 px-4">
@@ -80,7 +80,7 @@
                                     @if($item->status === 'pending')
                                         <form action="{{ route('admin.redemptions.complete', $item) }}" method="POST" class="inline" onsubmit="return confirm('Tandai penukaran ini sebagai selesai ditransfer ke peserta?')">
                                             @csrf
-                                            <button type="submit" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#10B981] to-emerald-600 text-white font-heading font-semibold text-xs shadow-xs hover:opacity-95 transition-all">
+                                            <button type="submit" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-heading font-bold text-xs shadow-xs hover:opacity-95 transition-all cursor-pointer">
                                                 Tandai Selesai
                                             </button>
                                         </form>

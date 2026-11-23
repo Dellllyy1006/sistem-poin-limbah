@@ -12,10 +12,29 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #FAF9F6;
+    background-color: #FAFAFB;
     color: #1F2937;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
     font-family: 'Montserrat', sans-serif;
+}
+
+/* Custom Red Accent Utilities */
+.bg-gradient-red {
+    background: linear-gradient(135deg, #DC2626 0%, #E11D48 50%, #B91C1C 100%);
+}
+
+.text-gradient-red {
+    background: linear-gradient(135deg, #DC2626 0%, #EF4444 50%, #E11D48 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glow-red {
+    box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.3), 0 8px 10px -6px rgba(220, 38, 38, 0.2);
+}
+
+.glow-red-sm {
+    box-shadow: 0 4px 14px 0 rgba(220, 38, 38, 0.25);
 }

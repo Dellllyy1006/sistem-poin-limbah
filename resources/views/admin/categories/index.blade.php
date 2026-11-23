@@ -10,18 +10,18 @@
     </div>
 
     <!-- Strict Domain Limitation Banner -->
-    <div class="p-4 rounded-xl bg-orange-50 border border-orange-200 text-orange-900 text-xs sm:text-sm flex items-start gap-3 shadow-xs">
-        <svg class="w-5 h-5 text-[#F97316] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-950 text-xs sm:text-sm flex items-start gap-3 shadow-xs">
+        <svg class="w-5 h-5 text-red-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div>
-            <strong class="font-bold">Batasan Domain Ketat (Strict Domain Rule):</strong>
+            <strong class="font-bold text-red-900">Batasan Domain Ketat (Strict Domain Rule):</strong>
             Sesuai dokumen aturan sistem (Rules.md), sistem <strong>HANYA</strong> menerima 2 kategori: <strong>Botol</strong> (satuan pcs) dan <strong>Kaleng</strong> (satuan gram). Penambahan jenis limbah di luar ketentuan ini dilarang oleh arsitektur sistem.
         </div>
     </div>
 
     <!-- Category Table -->
-    <div class="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xs">
+    <div class="bg-white border border-[#E5E7EB] rounded-3xl overflow-hidden shadow-xs">
         <table class="w-full text-left text-sm text-gray-700">
             <thead class="bg-[#FAF9F6] text-xs font-semibold text-gray-500 uppercase border-b border-[#E5E7EB]">
                 <tr>
@@ -36,20 +36,20 @@
             </thead>
             <tbody class="divide-y divide-[#E5E7EB]">
                 @foreach($categories as $category)
-                    <tr class="hover:bg-gray-50/70 transition-colors">
+                    <tr class="hover:bg-red-50/20 transition-colors">
                         <td class="py-4 px-6 font-mono text-xs font-bold text-gray-500">#{{ $category->id }}</td>
-                        <td class="py-4 px-6 font-heading font-bold text-gray-900 text-base">
+                        <td class="py-4 px-6 font-heading font-extrabold text-gray-900 text-base">
                             {{ $category->name }}
                         </td>
                         <td class="py-4 px-6">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium {{ $category->unit_type === 'pcs' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-amber-50 text-amber-700 border border-amber-200' }}">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold {{ $category->unit_type === 'pcs' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200' }}">
                                 {{ $category->unit_type }}
                             </span>
                         </td>
                         <td class="py-4 px-6 font-semibold text-gray-800">
                             Per {{ number_format($category->unit_divisor) }} {{ $category->unit_type }}
                         </td>
-                        <td class="py-4 px-6 font-bold text-[#F97316]">
+                        <td class="py-4 px-6 font-extrabold text-red-600">
                             {{ $category->base_point }} Poin
                         </td>
                         <td class="py-4 px-6 text-xs text-gray-600 font-mono">
@@ -60,7 +60,7 @@
                             @endif
                         </td>
                         <td class="py-4 px-6 text-right">
-                            <a href="{{ route('admin.categories.edit', $category) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-semibold text-xs transition-colors shadow-2xs">
+                            <a href="{{ route('admin.categories.edit', $category) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-semibold text-xs transition-colors shadow-2xs">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
